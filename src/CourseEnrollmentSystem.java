@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class CourseEnrollmentSystem {
     static final String FILE_NAME = "users.csv";
     static HashMap<String, User> users = new HashMap<>();
     static HashMap<String, List<String>> userCourses = new HashMap<>();
