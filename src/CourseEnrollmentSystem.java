@@ -7,7 +7,7 @@ public class CourseEnrollmentSystem {
     static HashMap<String, List<String>> userCourses = new HashMap<>();
     static String currentUser = null;
 
-    // Список доступных курсов (теперь храним только названия курсов)
+    // Список доступных курсов
     static List<String[]> availableCourses = List.of(
             new String[]{"Introduction to Engineering and Computer Science"},
             new String[]{"Programming Languages I"},
@@ -33,10 +33,11 @@ public class CourseEnrollmentSystem {
         while (true) {
             System.out.println("1. Register");
             System.out.println("2. Login");
-            System.out.println("3. Exit");
+            System.out.println("3. Generate Reports");
+            System.out.println("4. Exit");
             System.out.print("Choose an option: ");
             int choice = safeIntInput(scanner);
-            scanner.nextLine(); // Clear input
+            scanner.nextLine();
 
             if (choice == 1) {
                 System.out.print("Enter your name: ");
@@ -60,7 +61,7 @@ public class CourseEnrollmentSystem {
                     saveUsersToCSV();
                     System.out.println("Registration successful!");
 
-                    // Call the course registration process after registration
+
                     registerForCourse(scanner, email);
                 }
             } else if (choice == 2) {
@@ -77,6 +78,8 @@ public class CourseEnrollmentSystem {
                     System.out.println("User not found.");
                 }
             } else if (choice == 3) {
+                generateReports();
+            } else if (choice == 4) {
                 System.out.println("Goodbye!");
                 break;
             } else {
@@ -123,18 +126,50 @@ public class CourseEnrollmentSystem {
         }
     }
 
-    // Регистрация на курс
+
+    static void generateReports() {
+
+        System.out.println("\nTotal number of registered users: " + users.size());
+
+
+        System.out.println("\nUser Course Report:");
+        for (Map.Entry<String, List<String>> entry : userCourses.entrySet()) {
+            String email = entry.getKey();
+            List<String> courses = entry.getValue();
+            System.out.println("User: " + users.get(email).getName() + " (" + email + ")");
+            System.out.println("Courses: " + (courses.isEmpty() ? "No courses enrolled" : String.join(", ", courses)));
+            System.out.println();
+        }
+
+
+        System.out.println("\nMost Popular Courses:");
+        Map<String, Integer> coursePopularity = new HashMap<>();
+        for (List<String> courses : userCourses.values()) {
+            for (String course : courses) {
+                coursePopularity.put(course, coursePopularity.getOrDefault(course, 0) + 1);
+            }
+        }
+
+
+        coursePopularity.entrySet().stream()
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue() + " registrations"));
+
+        System.out.println();
+    }
+
+
     static void registerForCourse(Scanner scan, String email) {
         List<String> courses = userCourses.getOrDefault(email, new ArrayList<>());
 
-        // Печать всех доступных курсов
+
         System.out.println("Available Courses:");
         for (int i = 0; i < availableCourses.size(); i++) {
             String[] course = availableCourses.get(i);
             System.out.println((i + 1) + ". " + course[0]);
         }
 
-        // Ввод от пользователя
+
         while (true) {
             System.out.print("Enter the number of the course you want to register for (0 to skip): ");
             int courseChoice = safeIntInput(scan);
@@ -147,7 +182,7 @@ public class CourseEnrollmentSystem {
                 String[] selectedCourse = availableCourses.get(courseChoice - 1);
                 String courseName = selectedCourse[0];
 
-                // Проверяем, записан ли уже пользователь на этот курс
+
                 if (courses.contains(courseName)) {
                     System.out.println("You are already registered for this course.");
                 } else {
@@ -155,7 +190,7 @@ public class CourseEnrollmentSystem {
                     userCourses.put(email, courses);
                     saveUsersToCSV();
                     System.out.println("You have successfully registered for: " + courseName);
-                    break;  // После успешной регистрации выходим из цикла
+                    break;
                 }
             } else {
                 System.out.println("Invalid choice. Please try again.");
@@ -182,7 +217,7 @@ public class CourseEnrollmentSystem {
 
             switch (choice) {
                 case 1:
-                    registerForCourse(scan, currentUser);  // Вызываем функцию регистрации на курс
+                    registerForCourse(scan, currentUser);
                     break;
 
                 case 2:
@@ -200,45 +235,7 @@ public class CourseEnrollmentSystem {
                     }
                     break;
 
-                case 3:
-                    if (courses.isEmpty()) {
-                        System.out.println("You are not enrolled in any courses.");
-                    } else {
-                        System.out.println("Your current courses: " + courses);
-                    }
-                    break;
-
-                case 4:
-                    currentUser = null;
-                    System.out.println("You have logged out.");
-                    return;
-
-                case 5:
-                    System.out.print("Enter new email: ");
-                    String newEmail = scan.nextLine().trim();
-                    if (!isValidEmail(newEmail)) {
-                        System.out.println("Invalid email format.");
-                        break;
-                    }
-                    if (users.containsKey(newEmail)) {
-                        System.out.println("This email is already in use.");
-                    } else {
-                        String password = users.get(currentUser).getPassword();
-                        List<String> currentCourses = userCourses.get(currentUser);
-                        String name = users.get(currentUser).getName();
-
-                        users.remove(currentUser);
-                        userCourses.remove(currentUser);
-
-                        users.put(newEmail, new User(name, newEmail));
-                        userCourses.put(newEmail, currentCourses);
-                        currentUser = newEmail;
-                        saveUsersToCSV();
-                        System.out.println("Email changed to: " + currentUser);
-                    }
-                    break;
-
-                case 9: // View all available courses
+                case 9:
                     System.out.println("Available Courses:");
                     for (String[] courseItem : availableCourses) {
                         System.out.println(courseItem[0]);
@@ -275,10 +272,6 @@ public class CourseEnrollmentSystem {
 
         public String getEmail() {
             return email;
-        }
-
-        public String getPassword() {
-            return null;
         }
     }
 }
