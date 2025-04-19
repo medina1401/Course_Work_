@@ -7,22 +7,22 @@ public class CourseEnrollmentSystem {
     static HashMap<String, List<String>> userCourses = new HashMap<>();
     static String currentUser = null;
 
-    // Список доступных курсов
+    // Список доступных курсов (теперь храним только названия курсов)
     static List<String[]> availableCourses = List.of(
-            new String[]{"COM 101", "Introduction to Engineering and Computer Science"},
-            new String[]{"COM 103", "Programming Languages I"},
-            new String[]{"MAT 601", "Calculus I"},
-            new String[]{"MAT 603", "Algebra and Geometry I"},
-            new String[]{"MDE 131", "Physical Education I"},
-            new String[]{"MDE 402", "Philosophy"},
-            new String[]{"ELT 122", "Foreign Language I"},
-            new String[]{"COM 141", "Programming Languages II"},
-            new String[]{"COM 800", "Programming Language Course Work"},
-            new String[]{"MAT 151", "Discrete Mathematics I"},
-            new String[]{"MAT 602", "Calculus II"},
-            new String[]{"MDE 136", "Physical Education II"},
-            new String[]{"MDE 205", "Russian Language"},
-            new String[]{"ELT 123", "Foreign Language II"}
+            new String[]{"Introduction to Engineering and Computer Science"},
+            new String[]{"Programming Languages I"},
+            new String[]{"Calculus I"},
+            new String[]{"Algebra and Geometry I"},
+            new String[]{"Physical Education I"},
+            new String[]{"Philosophy"},
+            new String[]{"Foreign Language I"},
+            new String[]{"Programming Languages II"},
+            new String[]{"Programming Language Course Work"},
+            new String[]{"Discrete Mathematics I"},
+            new String[]{"Calculus II"},
+            new String[]{"Physical Education II"},
+            new String[]{"Russian Language"},
+            new String[]{"Foreign Language II"}
     );
 
     public static void main(String[] args) {
@@ -115,7 +115,7 @@ public class CourseEnrollmentSystem {
             for (String email : users.keySet()) {
                 User user = users.get(email);
                 List<String> courses = userCourses.getOrDefault(email, new ArrayList<>());
-                String coursesString = String.join(";", courses);
+                String coursesString = String.join(";", courses);  // Сохраняем только названия курсов
                 pw.println(user.getName() + "," + email + "," + coursesString);
             }
         } catch (IOException e) {
@@ -131,7 +131,7 @@ public class CourseEnrollmentSystem {
         System.out.println("Available Courses:");
         for (int i = 0; i < availableCourses.size(); i++) {
             String[] course = availableCourses.get(i);
-            System.out.println((i + 1) + ". " + course[0] + ": " + course[1]);
+            System.out.println((i + 1) + ". " + course[0]);
         }
 
         // Ввод от пользователя
@@ -145,17 +145,16 @@ public class CourseEnrollmentSystem {
 
             if (courseChoice > 0 && courseChoice <= availableCourses.size()) {
                 String[] selectedCourse = availableCourses.get(courseChoice - 1);
-                String courseCode = selectedCourse[0];
-                String courseName = selectedCourse[1];
+                String courseName = selectedCourse[0];
 
                 // Проверяем, записан ли уже пользователь на этот курс
-                if (courses.contains(courseCode)) {
+                if (courses.contains(courseName)) {
                     System.out.println("You are already registered for this course.");
                 } else {
-                    courses.add(courseCode);
+                    courses.add(courseName);
                     userCourses.put(email, courses);
                     saveUsersToCSV();
-                    System.out.println("You have successfully registered for: " + courseCode + ": " + courseName);
+                    System.out.println("You have successfully registered for: " + courseName);
                     break;  // После успешной регистрации выходим из цикла
                 }
             } else {
@@ -242,7 +241,7 @@ public class CourseEnrollmentSystem {
                 case 9: // View all available courses
                     System.out.println("Available Courses:");
                     for (String[] courseItem : availableCourses) {
-                        System.out.println(courseItem[0] + ": " + courseItem[1]);
+                        System.out.println(courseItem[0]);
                     }
                     break;
 
