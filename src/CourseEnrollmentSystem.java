@@ -240,6 +240,20 @@ public class CourseEnrollmentSystem {
                         System.out.println("Incorrect current password.");
                     }
                     break;
+                case 8:
+                    System.out.print("Are you sure you want to delete your account? (yes/no): ");
+                    String confirmation = scan.nextLine().trim().toLowerCase();
+                    if (confirmation.equals("yes")) {
+                        users.remove(currentUser);
+                        userCourses.remove(currentUser);
+                        saveUsersToCSV();
+                        System.out.println("Your account has been deleted.");
+                        currentUser = null;
+                        return;
+                    } else {
+                        System.out.println("Account deletion canceled.");
+                    }
+                    break;
                 case 9:
                     System.out.println("Available Courses:");
                     for (String[] course : availableCourses) {
