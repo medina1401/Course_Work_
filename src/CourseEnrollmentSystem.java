@@ -55,7 +55,6 @@ public class CourseEnrollmentSystem {
                     userCourses.put(email, new ArrayList<>());
                     saveUsersToCSV();
                     System.out.println("Registration successful!");
-                    registerForCourse(scanner, email);
                 }
             } else if (choice == 2) {
                 System.out.print("Enter your email: ");
