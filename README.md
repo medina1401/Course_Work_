@@ -23,12 +23,15 @@ Efficient handling of student data:
 
 -Register, Login, Update, Delete.
 
+![Image alt](https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.17.44.png)
 
 
 ### Course Enrollment
 Smooth interaction with course data:
 
 -Enroll, Drop, View, Search.
+
+![Image alt]([https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.17.44.png])
 
 
 ### Data Persistence
@@ -38,6 +41,8 @@ Reliable storage across sessions:
 
 -CSV format ensures data is easily readable and editable.
 
+![Image alt]([[https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.17.44.png])
+
 
 ### Reporting and Analysis
 Quick insights and stats:
@@ -45,6 +50,8 @@ Quick insights and stats:
 -View total registered user count.
 
 -View all available courses.
+
+![Image alt]([[[https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.17.44.png])
 
 
 ### Error Handling
@@ -58,7 +65,7 @@ Robust handling of edge cases:
 
 -Prevents crashing with try-catch safeguards.
 
-
+![Image alt](https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.20.40.png)
 
 
 
