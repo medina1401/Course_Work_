@@ -31,7 +31,7 @@ Smooth interaction with course data:
 
 -Enroll, Drop, View, Search.
 
-![Image alt]([https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.17.44.png])
+![Image alt](https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.18.29.png)
 
 
 ### Data Persistence
