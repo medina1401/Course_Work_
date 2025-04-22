@@ -41,7 +41,7 @@ Reliable storage across sessions:
 
 -CSV format ensures data is easily readable and editable.
 
-![Image alt]([[https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.17.44.png])
+![Image alt](https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.19.03.png)
 
 
 ### Reporting and Analysis
@@ -51,7 +51,7 @@ Quick insights and stats:
 
 -View all available courses.
 
-![Image alt]([[[https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.17.44.png])
+![Image alt](https://github.com/medina1401/Course_Work_/blob/main/Снимок%20экрана%202025-04-22%20в%2015.19.47.png)
 
 
 ### Error Handling
